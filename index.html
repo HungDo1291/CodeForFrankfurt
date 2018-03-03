@@ -44,12 +44,11 @@
 				var sum = 0;
 				var min = 0;
 				var max = 10000000; //max was found by looping through all data
-				var middle = 100000; //hard coded to see different colors on Germany map
+				var middle = 1000; //hard coded to see different colors on Germany map
 				for (var i = 0; i < child_markers.length; i++) {
 					var one_child = child_markers[i]
 					value = one_child._popup._content
-					console.log(value)
-					sum += parseFloat(value);//markers[i].number; 
+					sum += parseFloat(value);
 				}
 				var average = sum/child_markers.length;
 	
@@ -62,29 +61,12 @@
 		);
 		var find_max=0;
 		var find_min= 100;
-		for (var i=0; i< 100; i++){
+		for (var i=0; i< json_data.length; i++){
 
 			var first_point = json_data[i];
 			var first_sensor = first_point.sensordatavalues[0]
 			var second_sensor = first_point.sensordatavalues[1]
 			console.log(i)
-			//console.log(first_sensor.value)
-			//console.log(second_sensor.value)
-			//console.log(first_point.location.latitude);
-			//console.log(first_point.location.longitude);
-		
-			//var marker = new L.marker([
-				//first_point.location.latitude,
-				//first_point.location.longitude])
-				//.addTo(mymap)
-				//.bindPopup(
-				//	"PM10 = "
-				//	+first_sensor.value 
-				//	+", PM2.5 = "
-				//	+second_sensor.value
-				//)
-				//s.openPopup();
-
 			var title = first_sensor.value
 			find_max= Math.max(title, find_max)
 			find_min= Math.min(title, find_min)
@@ -94,7 +76,6 @@
 				{ title: title});
 			marker.bindPopup(title);
 			markers.addLayer(marker);	
-			//console.log(marker)
 		};
 		console.log("max = ", find_max)
 		console.log("min = ", find_min)
