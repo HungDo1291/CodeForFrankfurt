@@ -1,0 +1,14 @@
+fine dust sensor from alibaba
+Stugart has 300 sensors
+Frankfurt has 10 sensors
+sensor : particle 10, particle 2.5 (very danerous)
+WHO value is stricker than Germany's value
+LORA End node solution: wifi with with longer range (15-20km) and less energy,
+for long range and low-power IoT networks.
+Rasperi pi with lora: 16E full arm 
+LORA GPS Hat 32Euro
+Without lora can use phone but it consumes energy from your phone
+Camera module Pi zero edition
+Rasperi pi will consume more energy than arduino
+The things network
+The things network AES security
