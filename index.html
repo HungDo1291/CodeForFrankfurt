@@ -26,8 +26,6 @@
 		latlng = L.latLng(51.103, 8.549);
 
 	var map = L.map('mapid', {center: latlng, zoom: 6, layers: [tiles]});
-
-	
 	
 	var myRequest = new XMLHttpRequest();
 
@@ -66,7 +64,6 @@
 			var first_point = json_data[i];
 			var first_sensor = first_point.sensordatavalues[0]
 			var second_sensor = first_point.sensordatavalues[1]
-			console.log(i)
 			var title = first_sensor.value
 			find_max= Math.max(title, find_max)
 			find_min= Math.min(title, find_min)
@@ -90,22 +87,7 @@
 		return average
 	}
 
-
-
-
-
-
-
-
-
 </script>
-
-
-
-
-
-
-
 </body>
 
 </html>
