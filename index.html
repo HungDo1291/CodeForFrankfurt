@@ -40,55 +40,60 @@
 				iconCreateFunction: function (cluster) {
 					var child_markers = cluster.getAllChildMarkers();
 					var sum = 0;
-					var scale_min = 0;
-					var scale_max = 1000; //max was found by looping through all data
-					//var middle = 1000; //hard coded to see different colors on Germany map
+					//var max =0;
 					for (var i = 0; i < child_markers.length; i++) {
 						var one_child = child_markers[i]
 						value = one_child._popup._content
+						
 						sum += parseFloat(value);
 					}
 					var average = sum/child_markers.length;
 					average = parseInt(average)
 
 					//var color = (average -scale_min)/(scale_max - scale_min)*255
-					var css_class = average > 3000 ? 'red':
-									average > 2000 ? 'orange'   : 
-									average > 1000 ? 'yellow':
-									average > 500  ? 'green' :
+					var css_class = average > 70 ? 'red':
+									average > 60 ? 'orange'   : 
+									average > 50 ? 'yellow':
+									average > 35  ? 'green' :
 													'blue';
-					//var r = 200;								
-					//var text = "background-color: rgba(" + toString(r) + ",0,0,0.5)";
-					return L.divIcon({ html: average, 
+					
+					var scale_max = 80000; //hard coded to see different colors on Germany map
+					
+					//if (average > scale_max){ color = scale_max;}else (color = average)
+					//var red = color/scale_max*255;	
+					//var blue = (1-color/scale_max)*255;
+					//return L.divIcon({ html: '<div style="background-color: rgba('+red.toString()+', 0, '+blue.toString()+', 0.6);">' + average + '</div>', 
+					return L.divIcon({ html: average + '</div>', 
 										className: css_class, 
-										iconSize: L.point(40, 40) });
+										iconSize: L.point(20, 20) });
 				},
 				//Disable all of the defaults:
 				spiderfyOnMaxZoom: false, showCoverageOnHover: false, zoomToBoundsOnClick: false, 
 				//singleMarkerMode:  If set to true, overrides the icon for all added markers 
 				//to make them appear as a 1 size cluster. 
 				singleMarkerMode:true,
-			}
+				}
 			);
-			//var find_max=0;
-			//var find_min= 100;
+
 			for (var i=0; i< json_data.length; i++){
 
 				var first_point = json_data[i];
 				var first_sensor = first_point.sensordatavalues[0]
 				var second_sensor = first_point.sensordatavalues[1]
 				var title = first_sensor.value
-				//find_max= Math.max(title, find_max)
-				//find_min= Math.min(title, find_min)
+
 				var marker = L.marker(new L.LatLng(
 					first_point.location.latitude, 
 					first_point.location.longitude), 
 					{ title: title});
-				marker.bindPopup(title);
-				markers.addLayer(marker);	
+					
+				//exclude damaged sensors	
+				if (title < 1000){
+					marker.bindPopup(title);
+					markers.addLayer(marker);
+				}
 			};
-			//console.log("max = ", find_max)
-			//console.log("min = ", find_min)
+
 			map.addLayer(markers);
 		}
 
