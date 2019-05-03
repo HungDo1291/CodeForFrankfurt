@@ -1,7 +1,7 @@
 # CodeForFrankfurt
 Monitor Air Quality around Frankfurt. 
 
-Input is a json file that contains sensor position, and 2 values of dust particle.
+Input is a json file that contains the position of sensors and the level of dangerous particles.
 
 The code use Leaflet.js map visualization, with marker cluster plugin.
 
